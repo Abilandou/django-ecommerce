@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+	{% for product in allProducts %}
+	  {% if product.published %}
+	    <div class="col-sm-4 mb-2">
+	      {% include './../snippets/card.html' with instance=product %}
+	    </div> 
+	  {% endif %}
+	{% endfor%}
+</div>
+{% endblock %}

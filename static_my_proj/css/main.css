@@ -1,0 +1,12 @@
+body{
+
+}
+/*#add-to-card-button{
+	color: blue;
+}*/
+
+#add-to-card-button:hover{
+	border-radius: 8px;
+	border-width: 2px;
+	border-color: green;
+}

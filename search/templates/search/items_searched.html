@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+	{% if request.GET.q %}
+		<div class="col-12 mb-3">
+			Results for: <b>{{ query }}</b>
+		</div>
+	{% else %}
+		<div class="col-12 col-md-8">
+			{% include './snippets/search_form.html' %}
+		</div>
+	{% endif %}
+
+	<div class="col-12">
+		<hr>
+	</div>
+
+	{% for product in allProducts %}
+	  {% if product.published %}
+	    <div class="col-sm-4">
+	      {% include './../snippets/card.html' with instance=product %}
+	    </div> 
+	  {% endif %}
+	{% endfor%}
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+		<div class="row">
+			<div class="col-sm-5" >
+        {% if object.image %}
+          <img width="50px" height="450px" src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }} image loading..">
+        {% endif %}
+      </div>
+      <div class="col-sm-7" >
+        <p>
+          
+          <!-- <button class="btn btn-success">Add To Cart</button> -->
+         
+          <a href="#" class="btn btn-primary">Direct Order</a>
+          {% include './../snippets/update_cart.html' with product=object cart=cart %}
+        
+        </p>
+        <h4>{{ object.title | linebreaks}}</h4>
+        <h6>added {{ object.timestamp | timesince}} ago</h6>
+        <h6>{{ object.price }}CFAF</h6>
+        <p>{{ object.description | linebreaks}}</p>
+      </div>
+		</div>
+{% endblock %}
+
+
+
+
+
+

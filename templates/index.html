@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+  	<div class="heading">{{ title }}</div>
+  	<div class="col-sm-12">
+    	{% if request.user.is_authenticated %}
+    		<p>{{ premium_content }}</p>
+    	{% endif %}
+      <div class="col-sm-6">
+        <div class="heading">{{ featured_title }}</div>
+         
+
+          <ul>
+            {% for product in allProducts %}
+              {% if product.featured %}
+                <li class="card">
+                {% if product.image %}
+                  <a href="/products/{{ product.slug}}"><img width="120px" height="120px" src="{{ product.image.url}}" class="img-fluid">
+                  {% endif %}
+                  <h3>{{ product.title}}</h3></a>
+                  <p>Product Id: {{ product.id}}</p>
+                  <p>Price: ${{ product.price}}</p>
+                  <p>{{ product.description |linebreaks| truncatewords:14}}</p>
+                  
+                </li>
+              {% endif %}
+            {% endfor%}
+          </ul>
+
+          
+        </div>
+    </div>
+  </div> 
+</div>
+{% endblock %}

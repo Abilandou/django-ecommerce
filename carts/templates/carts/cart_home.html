@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section id="cart_items">
+    <div class="container">     
+        <div class="table-responsive cart_info">
+        
+            <table class="table table-condensed">
+                <thead style="background-color:orange;color:white;">
+                    <tr class="cart_menu">
+                        <td class="image">#</td>
+                        <td class="item">Product</td>
+                        <td class="quantity">Quantity</td>
+                        <td class="price">Price</td>
+                        <td class="total">Total</td>
+                        <td class="delete">Remove Item</td>
+                    </tr>
+                </thead>
+                {% if cart.products.exists %}
+                <tbody>
+                {% for product in cart.products.all %}
+                    <tr>
+                        <td class="cart_product"> {{ product.id }}</td>
+                        <td class="cart_description"><a href="{{ product.get_absolute_url }}">
+                        {% if product.image %}
+                            <img width="90px" height="90px" src="{{ product.image.url }}" alt="{{ product.title }}" />
+                        {% endif %} <br>   
+                        {{ product.title }}
+
+                        </td>
+                        <td class="cart_quantity">
+                            <div class="cart_quantity_button">
+                                <a class="cart_quantity_up" href="}}"> + </a>
+                                <input class="cart_quantity_input" type="text" name="quantity" value="2" autocomplete="off" size="2">
+                               
+                                <a class="cart_quantity_down" href=""> - </a>
+                               
+                            </div>
+                        </td>
+                        <td class="cart_price">
+                            {{product.price}}
+                        </td>
+                        <td class="cart_total">
+                            
+                            {{product.price}}
+                        </td>
+                        <td class="cart_delete">
+                            <span>
+                            {% include './../snippets/update_cart.html' with product=object cart=cart in_cart=True %}
+                                
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <p class="text-danger">Cart is empty, please proceed to <a href="/products">products</a> and add to cart.</p>
+                    </tr>
+                    {% endif %}
+                </tbody>
+                
+            </table>
+            
+	            
+        </div>
+    </div>
+</section> <!--/#cart_items-->
+<section id="do_action">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					
+				</div>
+				<div class="col-sm-6">
+					<div class="total_area">
+                    {% if cart.total > 0 %}
+						<table>
+							<li class="">Cart Sub Total <span>${{cart.subtotal }}</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>${{cart.total }}</span></li>
+						</table>
+							<a class="btn btn-success check_out" href='{% url "cart:checkout" %}'>Check Out</a>
+					</div>
+                    {% endif %}
+				</div>
+			</div>
+		</div>
+</section><!--/#do_action-->
+
+
+{% endblock %}
