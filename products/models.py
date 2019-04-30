@@ -61,7 +61,7 @@ PRODUCT_CATEGORIES = (
 class Product(models.Model):
 
 	title            = models.CharField(max_length=120, unique=True)
-	product_category = models.CharField(max_length=120, choices=PRODUCT_CATEGORIES, default="T-Shirt")
+	category         =  models.CharField(max_length=120, choices=PRODUCT_CATEGORIES, default="T-Shirt")
 	slug             = models.SlugField(blank=True, unique=True)
 	description      = models.TextField()
 	price            = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
