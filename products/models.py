@@ -50,16 +50,25 @@ class ProductManager(models.Manager):
 	def search(self, query):
 		return self.get_queryset().published().search(query)
 
+PRODUCT_CATEGORIES = (
+	('t-shirts', 'T-Shirts'),
+	('shoes', 'Shoes'),
+	('women wears', 'Women Wears'),
+	('trousers', 'Trousers'),
+
+)
+
 class Product(models.Model):
 
-	title         = models.CharField(max_length=120, unique=True)
-	slug          = models.SlugField(blank=True, unique=True)
-	description   = models.TextField()
-	price         = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
-	image         = models.ImageField(upload_to=upload_image_path, null=True, blank=True, unique=True)
-	featured      = models.BooleanField(default=False)
-	published	  = models.BooleanField(default=True)
-	timestamp     = models.DateTimeField(auto_now_add=True)
+	title            = models.CharField(max_length=120, unique=True)
+	product_category = models.CharField(max_length=120, choices=PRODUCT_CATEGORIES, default="T-Shirt")
+	slug             = models.SlugField(blank=True, unique=True)
+	description      = models.TextField()
+	price            = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
+	image            = models.ImageField(upload_to=upload_image_path, null=True, blank=True, unique=True)
+	featured         = models.BooleanField(default=False)
+	published	     = models.BooleanField(default=True)
+	timestamp        = models.DateTimeField(auto_now_add=True)
 
 	#actually overwrite it by creating an instance
 	#Not actually overwriting but extending to it.
