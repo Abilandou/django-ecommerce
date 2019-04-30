@@ -1,11 +1,11 @@
 BEFORE YOU CLONE TO RUN AND TEST PROJECT PLEASE DO THE FOLLOWING.
-	- Install a virtual environment follow below link to create the virtual environment
+	- Install a virtual environment. Follow below link to create the virtual environment
 		https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/26/python-virtual-env/
 	- Activate your virtual environment. 
 	- In The activated virtual environment, install django 1.11.4
 	- After installing the django 1.11.4
 	- Clone this repo to that directory.
-	- cd to the clone directory.
+	- cd to the cloned directory.
 	- run command below to start the python-django server
 		python manage.py runserver
 	- Open any browser and go to the following url.
