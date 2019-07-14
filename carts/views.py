@@ -66,9 +66,9 @@ def checkout_home(request):
 		if request.user.is_authenticated():
 			# Get user address automatically on shipping and Billing form
 			address_qs = Address.objects.filter(billing_profile=billing_profile) #return user billing profile
-		shipping_address_qs = address_qs.filter(address_type='shipping')#shipping address
-		billing_address_qs = address_qs.filter(address_type='billing')#billing address
-
+		# else:
+		# 	shipping_address_qs = address_qs.filter(address_type='shipping')# shipping address
+		# 	billing_address_qs = address_qs.filter(address_type='billing')# billing address
 
 		order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
 		if shipping_address_id:
@@ -106,7 +106,9 @@ def checkout_home(request):
 		"guest_form":guest_form,
 		"address_form":address_form,
 		# "billing_form":billing_form,
-		"address_qs": address_qs  #user address added in context to seen in the view(html pages)
+		"address_qs": address_qs  # user address added in context to seen in the view(html pages)
+		# "shipping_address_qs": shipping_address_qs,
+		# "billing_address_qs": billing_address_qs
 
 	}
 	return render(request, 'carts/checkout.html', context)
@@ -114,3 +116,11 @@ def checkout_home(request):
 
 def checkout_done_view(request):
 	return render(request, "carts/checkout_done.html", {})
+
+
+def success_payment_view(request):
+	return render(request, "carts/success_payment.html", {})
+
+
+def failure_payment_view(request):
+	return render(request, "carts/failure_payment.html", {})

@@ -27,7 +27,7 @@ class BillingProfileManager(models.Manager):
 
 class BillingProfile(models.Model):
 	user 		= models.OneToOneField(User, unique=True, null=True, blank=True)
-	email 		= models.EmailField()
+	email 		= models.EmailField(null=True, blank=True, default="billingemail@gmail.com")
 	active		= models.BooleanField(default=True)
 	update		= models.DateTimeField(auto_now=True)
 	timestamp   = models.DateTimeField(auto_now_add=True)

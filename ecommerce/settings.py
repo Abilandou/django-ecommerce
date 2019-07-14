@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'jquery',
     'bootstrap4',
 
-    #Our Installed apps
+    # Our Installed apps
     'products',
     'search',
     'tags',

@@ -1,38 +1,90 @@
 {% extends "./base.html" %}
-
+{% load staticfiles %}
 {% block content %}
 
-<div class="container">
+
+<section >
+  <img  class="img-fluid" src="{% static 'images/market1.png' %}" alt="Norway"
+        style="
+            opacity:0.5;
+            background-color:black;
+            margin-top:-120px;
+            width:100%;
+            height:400px;
+        "
+  >
+  <div class="text-block"
+       style="
+          position: absolute;
+          bottom: 400px;
+          left: 20px;
+          background-color: teal;
+          padding: 20px;
+          border-radius:8px;
+          color:pink;
+
+        "
+        >
+    <h4 class="" >SHOP WITH A DIFFERENCE</h4>
+      <a href="/products" ><p class="btn btn-danger">Shop in a Snip<i class="material-icons prefix">trending_flat</i></p></a>
+  </div>
+
+
+</section>
+
+
+<div class="container-fluid"  >
+<!-- Display of featured products -->
+<div class="container-fluid">
   <div class="row">
-  	<div class="heading">{{ title }}</div>
-  	<div class="col-sm-12">
-    	{% if request.user.is_authenticated %}
-    		<p>{{ premium_content }}</p>
-    	{% endif %}
-      <div class="col-sm-6">
-        <div class="heading">{{ featured_title }}</div>
-         
+      <div class="indigo" style="width:100%; margin-top:-50px;" >
+          <p class="my-5">
+              <h2 class="orange-text" style="margin-left:30%;">Featured Items</h2>
+              <a href="#"><button class="btn transparent right"
+                      style="
+                         border-radius:3px;
+                         border-width:1px;
+                         border-color:orange;
+                         color:white;
+                         margin-top:-50px;
+                         margin-right:10px;
+                      " >
+                  Safer Purchase<i class="material-icons prefix">trending_flat</i>
+              </button></a>
+          </p>
+      </div>
+  	<div class="col-12" >
+        {% for product in allProducts %}
+		  {% if product.featured %}
 
-          <ul>
-            {% for product in allProducts %}
-              {% if product.featured %}
-                <li class="card">
-                {% if product.image %}
-                  <a href="/products/{{ product.slug}}"><img width="120px" height="120px" src="{{ product.image.url}}" class="img-fluid">
-                  {% endif %}
-                  <h3>{{ product.title}}</h3></a>
-                  <p>Product Id: {{ product.id}}</p>
-                  <p>Price: ${{ product.price}}</p>
-                  <p>{{ product.description |linebreaks| truncatewords:14}}</p>
-                  
-                </li>
-              {% endif %}
-            {% endfor%}
-          </ul>
-
-          
+        <div class="row card hoverable">
+            <div class="col-12">
+                <div class="col-sm-4">
+                    {% if product.image %}
+                <div class="card-image waves-effect waves-block waves-light">
+			    <a href="/products/{{ product.slug}}"><img width="100px" height="200px" src="{{ product.image.url}}" class="img-fluid my-4">
+               </a>
+                </div>
+                   {% endif %}
+                </div>
+                <div class="col-sm-8">
+                     <h2 class="card-title mt-4 text-darken-4" style="margin-left:50px;">{{ product.title}}</h2>
+                    <div class="divider"></div>
+                    <div class="col-sm-8 mt-2">
+                        <h4 class="orange-text" > FCFA{{ product.price}}</h4>
+                        <p>{{ product.description | truncatewords:50}}</p>
+                        <a  href="/products/{{product.slug}}" class="btn btn-danger white-text pull-right my-4">More Options<i class="material-icons prefix">chevron_right</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		  {% endif %}
+		{% endfor%}
         </div>
     </div>
+  </div>
   </div> 
 </div>
+
+
 {% endblock %}

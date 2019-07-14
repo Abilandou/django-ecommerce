@@ -1,12 +1,24 @@
 
-<div class="card" style="width:20rem;">
+<div class="card hoverable mx-1"  style="width:320px; height:450px;">
 	{% if instance.image %}
-		<a href="{{ instance.get_absolute_url }}" id="add-to-card-button"><img width="80px;" height="200px;" src="{{ instance.image.url }}" class="card-img-top" alt="{{ instance.title }} image loading..">
+		<div class="card-image waves-effect waves-block waves-light">
+			<a href="{{ instance.get_absolute_url }}" id="add-to-card-button"><img width="80px;" height="200px;" src="{{ instance.image.url }}" class="card-img-top" alt="{{ instance.title }} image loading..">
+			</a>
+
+		</div>
 	{% endif %}
-	<div class="card-body">
-		<h4 class="cart-title">{{ instance.title }}</h4></a>
-		<h5 class="cart-title">{{ instance.Product category }}</h5>
-		<h6 class="cart-title">{{ instance.price }}CFAF</h6>
-		<!-- <a href="{% url 'products:detail' slug=instance.slug %}" class="btn btn-danger">URL shortcut</a> -->
+
+	<div class="card-content">
+		<span class="card-title orange-text darken-4">{{ instance.title }}</span>
+		<p>{{ instance.price }}CFAF</p>
+		<p>{{ instance.description | truncatewords:25 }}</p>
+		<p class="mt-3"><a href="{% url 'products:detail' slug=instance.slug %}" class="btn teal-text mr-2">Learn More</a>
+			<a href="#">Add To Whishlist</a>
+		</p>
 	</div>
+
+
+
+
+
 </div>

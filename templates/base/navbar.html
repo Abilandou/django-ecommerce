@@ -1,60 +1,74 @@
 {% url 'home' as home_url %}
-{% url 'contact' as contact_url %}
+<!--{% url 'contact' as contact_url %}-->
 {% url 'products:list' as product_list_url %}
 {% url 'register' as register_url %}
 {% url 'login' as login_url %}
 {% url 'logout' as logout_url %}
 {% url 'cart:cart_home' as cart_url %}
+{% load staticfiles %}
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-  <a class="navbar-brand" href="{{ home_url }}">CEF506-Ecommerce</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item {% if request.path == home_url %} active {% endif %}">
-        <a class="nav-link" href="{{ home_url }}"><i class="fa fa-home"></i>Home <span class="sr-only">(current)</span></a>
+
+
+
+<div class="navbar-fixed ">
+  <nav class="white" >
+    <div class="nav-wrapper">
+      <a class="navbar-brand" href="{{ home_url }}"><img src="{% static 'images/logo/logo.png' %}" alt="Norway"></a>
+      <ul class="right hide-on-med-and-down">
+        <li class="black-text">{% include 'search/snippets/search_form.html' %}</li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="navbar-fixed ">
+  <nav class=" white" style="text-align:center;">
+    <div class="nav-wrapper" style="padding-left:200px; padding-right:60px;" >
+      <ul class=" hide-on-med-and-down"  >
+         <li class="nav-item {% if request.path == home_url %} active {% endif %}">
+        <a class=" black-text nav-link" href="{{ home_url }}"><i class="fa fa-home"></i>Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item {% if request.path == product_list_url %} active {% endif %}">
-        <a class="nav-link" href="{{ product_list_url }}"><i class="fa fa-list"></i>Products</a>
+      <li class=" nav-item {% if request.path == product_list_url %}  active {% endif %}">
+        <a class=" black-text nav-link" href="{{ product_list_url }}"><i class="fa fa-list"></i>Products</a>
       </li>
 
       <li class="nav-item {% if request.path == contact_url %} active {% endif %}">
-        <a class="nav-link" href="{{ contact_url }}"><i class="fa fa-envelope-open"></i>Contact</a>
+        <a class=" black-text nav-link" href="{{ contact_url }}"><i class="fa fa-envelope-open"></i>Contact</a>
       </li>
 
       <li class="nav-item {% if request.path == cart_url %} active {% endif %}">
-          <a class="nav-link" href="{{ cart_url }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <b class="text-success">{{ request.session.cart_items }}</b></a>
+          <a class=" black-text nav-link" href="{{ cart_url }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <b class="text-success">{{ request.session.cart_items }}</b></a>
       </li>
-<!--       <li class="nav-item dropdown">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
-      </li> -->
-    </ul>
+
+
     {% if request.user.is_authenticated %}
-      <li class="nav-item {% if request.path == logout_url %} active {% endif %}">
-          <a class="nav-link" href="{{ logout_url }}"><i class="fa fa-arrow-right"></i>Logout</a>
+      <li class=" right nav-item {% if request.path == logout_url %} active {% endif %}">
+          <a class="  black-text nav-link" href="{{ logout_url }}"><i class="fa fa-arrow-right"></i>Logout</a>
+      </li>
+        <li class=" right nav-item {% if request.path == login_url %} active {% endif %}">
+          <a class=" black-text nav-link" href="#">
+            <i class="fa fa-user"></i><b class="orange-text text-darken-4 text-capitalize">{{request.user.username}}</b>
+          </a>
       </li>
     {% else %}
-      <li class="nav-item {% if request.path == login_url %} active {% endif %}">
-          <a class="nav-link" href="{{ register_url }}"><i class="fa fa-user"></i></i>Register</a>
+      <li class=" right nav-item {% if request.path == register_url %} active {% endif %}">
+          <a class=" black-text nav-link" href="{{ register_url }}"><i class="fa fa-user"></i></i>Register</a>
       </li>
-      <li class="nav-item {% if request.path == login_url %} active {% endif %}">
-          <a class="nav-link" href="{{ login_url }}"><i class="fa fa-lock"></i></i>Login</a>
+      <li class=" right capitalize">
+          <a class=" black-text nav-link" href="{{ login_url }}"><i class="fa fa-lock"></i></i>Login</a>
       </li>
-      {% endif %}
 
-      <i class="ml-5">{% include 'search/snippets/search_form.html' %}</i>
-  </div>
-</nav>
+      {% endif %}
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+

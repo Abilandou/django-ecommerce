@@ -3,14 +3,19 @@
 {% block content %}
 
 <div class="col-6 mx-auto py-5 text-center">
-	<h5>Thank you for your order, Be sure to recieve a message from us ASAP</h5>
+	<h5>Complete Payment Below </h5>
 	<div class="row">
-		<div class="col-4">
-			<p>Take me <a href="/">Home</a></p>
+		<div class="col-5">
+			<h5 class="my-3 orange-text"> Using Paypal</h5><br>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="JX7VD3RE3BKBL">
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+
 		</div>
-		<div class="col-4">
-			<p>I want more <a href="/products">products</a></p>
-		</div>
+
 	</div>
 
 </div>
