@@ -4,59 +4,63 @@
 
 <div class="container-fluid">
     <div class="row card hoverable">
-            <div class="col-sm-12">
-                <div class="col-sm-4">
-                    {% if object.image %}
-                <div class="card-image waves-effect waves-block waves-light">
-			    <a href="/products/{{ product.slug}}"><img width="100px" height="200px" src="{{ product.image.url}}" class="img-fluid my-4">
-               </a>
+        <div class="col-sm-12">
+            <div class="col-sm-4">
+                {% if object.image %}
+            <div class="card-image waves-effect waves-block waves-light">
+            <a href="/products/{{ product.slug}}"><img width="100px" height="200px" src="{{ product.image.url}}" class="img-fluid my-4">
+           </a>
+            </div>
+               {% endif %}
+            </div>
+            <div class="col-sm-8">
+                <div class="col-sm-6" >
+                     <h1 class="card-title mt-4 text-darken-4" >{{ object.title}}</h1>
+                    <i class="text-danger" ><b>5 sold in less than 3hrs</b></i>
+                    <div class="divider"></div>
+
+                        <p>Condition: <b>New</b><br/>
+                            <form>
+                                Quantity:  <input type="number" value="1" min="1" max="10" name="quantity" style="height:50px; width:80px;">
+                           </form>
+                        </p>
+
+                    <div style="height:120px; background-color:#CDCDCD;" >
+                        <p>Price:<b class="orange-text"> FCFA{{ object.price }}</b></p>
+                        <p  class="right" style="margin-right:120px; margin-top:-50px; ">
+                            <br>
+                            {% include './../snippets/update_cart.html' with product=object cart=cart %}
+
+                        </p>
+
+                    </div><br/>
+                    <div style="height:200px; background-color:#CDCDCD;" >
+                        <p style="padding:5px;font-size:12px;"><b>Shipping:</b> <b>10FCFA</b>
+                            Expedited International Shipping
+                            International items may be subject to customs processing and additional charges.<br/>
+                            <b>Delivery:</b> Varies for items shipped from an international location <br /><br/>
+                            <b>Payments</b>:<img  title="payment methods we use" src="{% static 'images/payments.png' %}" alt="payments"><br/></br>
+
+                            <b>Returns:</b> 30 day returns. Buyer <b class="orange-text">pays</b> for return shipping
+                        </p>
+
+                    </div><br/>
+
                 </div>
-                   {% endif %}
-                </div>
-                <div class="col-sm-8">
-                    <div class="col-sm-6" >
-                         <h1 class="card-title mt-4 text-darken-4" >{{ object.title}}</h1>
-                        <i class="text-danger" ><b>5 sold in less than 3hrs</b></i>
-                        <div class="divider"></div>
-
-                            <p>Condition: <b>New</b><br/>
-                                <form>
-                                    Quantity:  <input type="number" value="1" min="1" max="10" name="quantity" style="height:50px; width:80px;">
-                               </form>
-                            </p>
-
-                        <div style="height:120px; background-color:#CDCDCD;" >
-                            <p>Price:<b class="orange-text"> FCFA{{ object.price }}</b></p>
-                            <p  class="right" style="margin-right:120px; margin-top:-50px; ">
-                                <br>
-                                {% include './../snippets/update_cart.html' with product=object cart=cart %}
-
-                            </p>
-
-                        </div><br/>
-                        <div style="height:200px; background-color:#CDCDCD;" >
-                            <p style="padding:5px;font-size:12px;"><b>Shipping:</b> <b>10FCFA</b>
-                                Expedited International Shipping
-                                International items may be subject to customs processing and additional charges.<br/>
-                                <b>Delivery:</b> Varies for items shipped from an international location <br /><br/>
-                                <b>Payments</b>:<img  title="payment methods we use" src="{% static 'images/payments.png' %}" alt="payments"><br/></br>
-
-                                <b>Returns:</b> 30 day returns. Buyer <b class="orange-text">pays</b> for return shipping
-                            </p>
-
-                        </div><br/>
-
-                    </div>
-                    <div class="col-sm-2 card #CDCDCD">
-                        <p>Shop with confidence</p>
-                       {% if object.image %}
-			              <img src="{{ product.image.url}}" class="img-fluid my-4">
-                        {% endif %}
-                        <p>Trusted seller, fast shipping, and easy returns. </p>
-                    </div>
+                <div class="col-sm-2 card #CDCDCD">
+                    <p>Shop with confidence</p>
+                   {% if object.image %}
+                      <img src="{{ product.image.url}}" class="img-fluid my-4">
+                    {% endif %}
+                    <p>Trusted seller, fast shipping, and easy returns. </p>
                 </div>
             </div>
 
+        </div><div class="divider"></div>
+        <div class="container" style=" text-align:justify">
+                <h4 class="orange-text text-darken-4" style="margin-left:150px; margin-right:150px; ">{{ object.title }}'s Description</h4>
+                <p>{{ object.description }}</p>
+            </div>
     </div>
 </div>
 
