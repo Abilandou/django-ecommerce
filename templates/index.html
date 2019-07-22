@@ -55,7 +55,7 @@
       </div>
   	<div class="col-12" >
         {% for product in allProducts %}
-		  {% if product.featured %}
+		    {% if product.featured %}
 
         <div class="row card hoverable">
             <div class="col-12">
@@ -72,7 +72,7 @@
                     <div class="divider"></div>
                     <div class="col-sm-8 mt-2">
                         <h4 class="orange-text" > FCFA{{ product.price}}</h4>
-                        <p>{{ product.description | truncatewords:50}}</p>
+                        <p style="text-align:justify">{{ product.description | truncatewords:50}}</p>
                         <a  href="/products/{{product.slug}}" class="btn btn-danger white-text pull-right my-4">More Options<i class="material-icons prefix">chevron_right</i></a>
                     </div>
                 </div>

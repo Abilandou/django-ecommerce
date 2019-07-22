@@ -13,7 +13,7 @@
 
 
 <div class="navbar-fixed ">
-  <nav class="white" >
+  <nav class="teal lighten-2" >
     <div class="nav-wrapper">
       <a class="navbar-brand" href="{{ home_url }}"><img src="{% static 'images/logo/logo.png' %}" alt="Norway"></a>
       <ul class="right hide-on-med-and-down">
@@ -24,40 +24,40 @@
 </div>
 
 <div class="navbar-fixed ">
-  <nav class=" white" style="text-align:center;">
+  <nav class=" teal lighten-2" style="text-align:center;">
     <div class="nav-wrapper" style="padding-left:200px; padding-right:60px;" >
       <ul class=" hide-on-med-and-down"  >
          <li class="nav-item {% if request.path == home_url %} active {% endif %}">
-        <a class=" black-text nav-link" href="{{ home_url }}"><i class="fa fa-home"></i>Home <span class="sr-only">(current)</span></a>
+        <a class=" black-text nav-link" href="{{ home_url }}">Home<i class="fa fa-home"></i> <span class="sr-only">(current)</span></a>
       </li>
       <li class=" nav-item {% if request.path == product_list_url %}  active {% endif %}">
-        <a class=" black-text nav-link" href="{{ product_list_url }}"><i class="fa fa-list"></i>Products</a>
+        <a class=" black-text nav-link" href="{{ product_list_url }}">Products<i class="fa fa-list"></i></a>
       </li>
 
       <li class="nav-item {% if request.path == contact_url %} active {% endif %}">
-        <a class=" black-text nav-link" href="{{ contact_url }}"><i class="fa fa-envelope-open"></i>Contact</a>
+        <a class=" black-text nav-link" href="{{ contact_url }}">Contact<i class="fa fa-envelope-open"></i></a>
       </li>
 
       <li class="nav-item {% if request.path == cart_url %} active {% endif %}">
-          <a class=" black-text nav-link" href="{{ cart_url }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <b class="text-success">{{ request.session.cart_items }}</b></a>
+          <a class=" black-text nav-link" href="{{ cart_url }}"> Cart <b class="text-success">{{ request.session.cart_items }}</b><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
       </li>
 
 
     {% if request.user.is_authenticated %}
       <li class=" right nav-item {% if request.path == logout_url %} active {% endif %}">
-          <a class="  black-text nav-link" href="{{ logout_url }}"><i class="fa fa-arrow-right"></i>Logout</a>
+          <a class="  black-text nav-link" href="{{ logout_url }}">Logout<i class="fa fa-arrow-right"></i></a>
       </li>
         <li class=" right nav-item {% if request.path == login_url %} active {% endif %}">
           <a class=" black-text nav-link" href="#">
-            <i class="fa fa-user"></i><b class="orange-text text-darken-4 text-capitalize">{{request.user.username}}</b>
+            <b class="orange-text text-darken-4 text-capitalize">{{request.user.username}}</b><i class="fa fa-user"></i>
           </a>
       </li>
     {% else %}
       <li class=" right nav-item {% if request.path == register_url %} active {% endif %}">
-          <a class=" black-text nav-link" href="{{ register_url }}"><i class="fa fa-user"></i></i>Register</a>
+          <a class=" black-text nav-link" href="{{ register_url }}">Register<i class="fa fa-user"></i></i></a>
       </li>
       <li class=" right capitalize">
-          <a class=" black-text nav-link" href="{{ login_url }}"><i class="fa fa-lock"></i></i>Login</a>
+          <a class=" black-text nav-link" href="{{ login_url }}">Login<i class="fa fa-lock"></i></a>
       </li>
 
       {% endif %}

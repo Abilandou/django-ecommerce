@@ -31,10 +31,10 @@
                         </td>
                         <td class="cart_quantity">
                             <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href="}}"> + </a>
+                                <a class="cart_quantity_up" href="#"> + </a>
                                 <input class="cart_quantity_input" type="text" name="quantity" value="2" autocomplete="off" size="2">
                                
-                                <a class="cart_quantity_down" href=""> - </a>
+                                <a class="cart_quantity_down" href="#"> - </a>
                                
                             </div>
                         </td>
@@ -48,11 +48,11 @@
                         <td class="cart_delete">
                             <span>
                             {% include './../snippets/update_cart.html' with product=object cart=cart in_cart=True %}
-                                
+
                             </span>
                         </td>
                     </tr>
-                    {% endfor %}
+                {% endfor %}
                     {% else %}
                     <tr>
                         <p class="text-danger">Cart is empty, please proceed to <a href="/products">products</a> and add to cart.</p>
@@ -77,7 +77,7 @@
                     {% if cart.total > 0 %}
 						<table>
 							<li class="">Cart Sub Total <span>${{cart.subtotal }}</span></li>
-							<li>Shipping Cost <span>Free</span></li>
+							<li>Shipping Cost <span>$1.08</span></li>
 							<li>Total <span>${{cart.total }}</span></li>
 						</table>
 							<a class="btn btn-success check_out" href='{% url "cart:checkout" %}'>Check Out</a>

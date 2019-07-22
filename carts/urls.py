@@ -6,7 +6,8 @@ from .views import (
 	checkout_home,
 	checkout_done_view,
 	success_payment_view,
-	failure_payment_view
+	failure_payment_view,
+	remove_from_cart
 )
 
 urlpatterns = [
@@ -15,7 +16,10 @@ urlpatterns = [
 		url(r'^checkout/$', checkout_home, name="checkout"),
 		url(r'^checkout/success/$', checkout_done_view, name="success"),
 		url(r'^checkout/success_payment/$', success_payment_view, name="payment_success"),
-		url(r'^checkout/failure_payment/$', failure_payment_view, name="payment_failure")
-		# url(r'^products/(?P<pk>\d+)/$', cart_update)
+		url(r'^checkout/failure_payment/$', failure_payment_view, name="payment_failure"),
+		url(r'^delete_product/(?P<pk>\d+)/$', remove_from_cart, name='remove')
+
+		# url(r'^(?P<object_id>[0-9]+)/delete_answer/$', views.objectDelete, name='delete_object')
+		# url(r'^del_product/(?P<pk>\d+)/$', remove_from_cart, name="del")
 ]
 

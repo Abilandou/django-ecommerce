@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
 from .models import Cart
 from orders.models import Order
 from accounts.forms import LoginForm, GuestForm
@@ -24,8 +25,9 @@ def cart_home(request):
 	
 	return render(request, "carts/cart_home.html", {"cart":cart_obj})
 
-def cart_update(request): 
-	# print(request.POST)
+
+def cart_update(request):
+	print(request.POST)
 	product_id = request.POST.get('product_id')
 	if product_id is not None:
 		try:
@@ -37,11 +39,17 @@ def cart_update(request):
 		# cart_obj.products.add(product_obj)
 		if product_obj in cart_obj.products.all():
 			cart_obj.products.remove(product_obj)
+
 		else:
 			cart_obj.products.add(product_obj)
 		request.session['cart_items'] = cart_obj.products.count()
 	
 	return redirect("cart:cart_home")
+
+
+def remove_from_cart(request, product_id=None):
+	pass
+
 
 def checkout_home(request):
 	cart_obj, cart_created = Cart.objects.new_or_get(request)
@@ -65,7 +73,7 @@ def checkout_home(request):
 
 		if request.user.is_authenticated():
 			# Get user address automatically on shipping and Billing form
-			address_qs = Address.objects.filter(billing_profile=billing_profile) #return user billing profile
+			address_qs = Address.objects.filter(billing_profile=billing_profile)  # return user billing profile
 		# else:
 		# 	shipping_address_qs = address_qs.filter(address_type='shipping')# shipping address
 		# 	billing_address_qs = address_qs.filter(address_type='billing')# billing address
@@ -97,7 +105,6 @@ def checkout_home(request):
 			del request.session['cart_id]
 			redirect to success
 		'''
-
 
 	context = {
 		"object":order_obj,

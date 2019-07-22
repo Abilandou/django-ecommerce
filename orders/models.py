@@ -17,6 +17,7 @@ ORDER_STATUS_CHOICES = (
 	('refunded', 'Refunded'),
 )
 
+
 class OrderManager(models.Manager):
 	def new_or_get(self, billing_profile, cart_obj):
 		created = False
@@ -31,7 +32,6 @@ class OrderManager(models.Manager):
 			obj = self.model.objects.create(billing_profile=billing_profile, cart=cart_obj)
 			created = True
 		return obj, created
-
 
 
 class Order(models.Model):
@@ -50,11 +50,10 @@ class Order(models.Model):
 
 	objects = OrderManager()
 
-
 	def update_total(self):
 		cart_total = self.cart.total
 		shipping_total = self.shipping_total
-		new_total = math.fsum([cart_total , shipping_total])
+		new_total = math.fsum([cart_total, shipping_total])
 		formatted_total = format(new_total, '.2f')
 		self.total = formatted_total
 		self.save()
@@ -75,6 +74,7 @@ class Order(models.Model):
 			self.save()
 		return self.status
 
+
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
 	# if not instance.order_id:
 	instance.order_id = unique_order_id_generator(instance)
@@ -83,9 +83,11 @@ def pre_save_create_order_id(sender, instance, *args, **kwargs):
 	if qs.exists():
 		qs.update(active=False)
 
+
 pre_save.connect(pre_save_create_order_id, sender=Order)
-	#generate the order_id
-	#generate the order total
+	# generate the order_id
+	# generate the order total
+
 
 def post_save_cart_total(sender, instance, created, *args, **kwargs):
 	cart_obj = instance
@@ -96,12 +98,15 @@ def post_save_cart_total(sender, instance, created, *args, **kwargs):
 		order_obj = qs.first()
 		# order_obj = update_total()
 
+
 post_save.connect(post_save_cart_total, sender=Cart)
+
 
 def post_save_order(sender, instance, created, *args, **kwargs):
 	print("running")
 	if created:
 		print("Updating... first")
 		instance.update_total()
+
 
 post_save.connect(post_save_order, sender=Order)

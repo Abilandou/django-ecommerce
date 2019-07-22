@@ -28,7 +28,15 @@
                         <p>Price:<b class="orange-text"> FCFA{{ object.price }}</b></p>
                         <p  class="right" style="margin-right:120px; margin-top:-50px; ">
                             <br>
+                            {% if product in cart.products %}
+
+                            <button type="submit" class="btn btn-link" >Remove</button>
+
+                          {% else %}
                             {% include './../snippets/update_cart.html' with product=object cart=cart %}
+
+                          {% endif %}
+
 
                         </p>
                     </div><br/>

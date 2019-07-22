@@ -29,40 +29,15 @@
 
 	{% include 'base/footer.html' %}
 
-	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
 	<script type="text/javascript" src="{% static 'js/jquery-3.3.1.js' %}"></script>
-	 <script type="text/javascript" src="{% static 'js/matjs/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/cart/cart.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/cart/cart.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/cart/rivets-cart.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/cart/rivets-cart.min.js' %}"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-	<script>
-		$(document).ready(function(){
-
-			$('.parallax').parallax();
-		});
-
-
-
-
-		$(document).ready(function(){
-  $('.carousel').carousel(
-  {
-    dist: 0,
-    padding: 0,
-    fullWidth: true,
-    indicators: true,
-    duration: 100,
-  }
-  );
-});
-
-	autoplay()
-	function autoplay() {
-		$('.carousel').carousel('next');
-		setTimeout(autoplay, 4500);
-	}
-
-
-
-	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/0.4.1/cart.min.js"></script>
+	<script type="text/javascript" src="{% static 'script/jsmain.js' %}"></script>
 
 </body>
 </html>

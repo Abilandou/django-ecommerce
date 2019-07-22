@@ -3,19 +3,14 @@
 	<input type="hidden" name="product_id" value="{{ product.id }}" />
 
 
-	{% if in_cart %}
-		<button type="submit" class="btn btn-link">Remove</button>
-	{% else %}
+	    {% if cart.products.exists %}
 
-	    {% if product in cart.products.all %}
-		     
-		    <button type="submit" class="btn btn-link">Remove</button>
+<!--		    <button type="submit" class="btn btn-link" >Remove</button>-->
 		  {% else %}
-		    
+
 		    <button type ="submit" class="btn btn-primary right" style="margin-right:87px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Add To Cart</button>
 
 		  {% endif %}
-	{% endif %}
 
 </form>
 

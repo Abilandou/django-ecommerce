@@ -31,10 +31,10 @@ class ProductFeaturedDetailView(DetailView):
 		return context
 
 
-
 class ProductListView(ListView):
 	queryset = Product.objects.all()
 	template_name = "product/product_list.html"
+
 	def get_context_data(self, *args, **kwargs):
 		context = super(ProductListView, self).get_context_data(*args, **kwargs)
 		print(context)
@@ -49,6 +49,7 @@ def product_list_view(request):
 	}
 
 	return render(request, "product/product_list.html", context)
+
 
 class ProductDetailView(DetailView):
 	queryset = Product.objects.all()
@@ -77,7 +78,7 @@ def product_detail_view(request, pk=None, *args, **kwargs):
 	# getSingleProduct = Product.objects.get(pk=pk)#pk=id
 	# getSingleProduct = get_object_or_404(Product, pk=pk)
 	# instance = Product.objects.filter(id=pk)
-	#print qs
+	# print qs
 	instance = Product.objects.get_by_id(pk)
 	if instance is None:
 		raise Http404("Product doesn't exists")
@@ -121,7 +122,6 @@ class ProductDetailSlugView(DetailView):
 	# 	return instance
 
 
-
 def product_detail_slug_view(request, slug=None, *args, **kwargs):
 
 	getAllProductsInCart = Cart.objects.all()
@@ -138,6 +138,5 @@ def product_detail_slug_view(request, slug=None, *args, **kwargs):
 	# 	context['cart'] = cart_obj
 	# 	print(cart_obj)
 	# 	return context
-
 
 	return render(request, "product/product_detail.html", context, {})
