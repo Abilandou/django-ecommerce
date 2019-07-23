@@ -72,6 +72,7 @@ urlpatterns = [
     url(r'^', include('products.urls', namespace="products")),
     url(r'^search/', include('search.urls', namespace="search")),
     url(r'^cart/', include('carts.urls', namespace="cart")),
+    url(r'^', include('categories.urls', namespace="categories")),
 
 # Endincluded url
     

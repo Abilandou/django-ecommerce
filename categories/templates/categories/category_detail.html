@@ -1,41 +1,16 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
-
 {% block content %}
 
-
-<section >
-  <img  class="img-fluid" src="{% static 'images/market1.png' %}" alt="Norway"
-        style="
-            opacity:0.5;
-            background-color:black;
-            margin-top:-120px;
-            width:100%;
-            height:400px;
-        "
-  >
-  <div class="text-block"
-       style="
-          position: absolute;
-          bottom: 400px;
-          left: 20px;
-          background-color: teal;
-          padding: 20px;
-          border-radius:8px;
-          color:pink;
-
-        "
-        >
-    <h4 class="" >Beautiful And Gorgeous Dresses For You</h4>
-      <a href="#products" ><p class="btn btn-danger">Take A Look<i class="material-icons prefix">trending_flat</i></p></a>
-  </div>
-
-
-</section>
-
+<div class="container">
+    <div class="row mt-2 ">
+        <h4 class="orange-text text-darken-4" style="margin-left:400px; margin-right:150px; ">Products Under {{ category.name }}</h4>
+    </div>
+    <div class="divider mb-3"></div>
+</div>
 <div class="container">
 	<div class="row">
+
 		{% for product in allProducts %}
 		  {% if product.published %}
 		<div class="row card hoverable" id="products">
@@ -62,7 +37,6 @@
 		  {% endif %}
 		{% endfor%}
 	</div>
-
     {% if allProducts.has_other_pages %}
       <ul class="pagination right">
         {% if allProducts.has_previous %}
@@ -84,24 +58,14 @@
         {% endif %}
       </ul>
     {% endif %}
-
-<!--    <div class="pagination">-->
-<!--    <span class="step-links">-->
-<!--        {% if allProducts.has_previous %}-->
-<!--            <a href="?page=1">&laquo; first</a>-->
-<!--            <a href="?page={{ allProducts.previous_page_number }}">previous</a>-->
-<!--        {% endif %}-->
-
-<!--        <span class="current">-->
-<!--            Page {{ allProducts.number }} of {{ allProducts.paginator.num_pages }}.-->
-<!--        </span>-->
-
-<!--        {% if allProducts.has_next %}-->
-<!--            <a href="?page={{ allProducts.next_page_number }}">next</a>-->
-<!--            <a href="?page={{ allProducts.paginator.num_pages }}">last &raquo;</a>-->
-<!--        {% endif %}-->
-<!--    </span>-->
-<!--</div>-->
 </div>
 
+
+
 {% endblock %}
+
+
+
+
+
+

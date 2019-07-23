@@ -1,4 +1,5 @@
 from django.views.generic import ListView, DetailView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
@@ -6,6 +7,7 @@ from django.http import Http404
 from .models import Product
 
 from carts.models import Cart
+from categories.models import Category
 
 
 # class ProductFeaturedListView(ListView):
@@ -41,11 +43,29 @@ class ProductListView(ListView):
 		return context
 
 
-def product_list_view(request):
-	queryset = Product.objects.all()#List all products in database
+def product_list_view(request, category_name=None):
+	category = None
+	products_list = Product.objects.all()  # List all products in database
+	page = request.GET.get('page', 1)
+
+	paginator = Paginator(products_list, 3)
+	try:
+		queryset = paginator.page(page)
+	except PageNotAnInteger:
+		queryset = paginator.page(1)
+	except EmptyPage:
+		queryset = paginator.page(paginator.num_pages)
+
+	categories = Category.objects.all()
+	if category_name:
+		category = get_object_or_404(Category, slug=category_name)
+		products = Product.filter(category=category)
 	context = {
 		'title': 'Listing all Products',
-		'allProducts': queryset
+		'allProducts': queryset,
+		'categories': categories,
+		'category': category,
+
 	}
 
 	return render(request, "product/product_list.html", context)
@@ -104,22 +124,6 @@ class ProductDetailSlugView(DetailView):
 		context['cart'] = cart_obj
 		# print(cart_obj)
 		return context 
-
-	# def get_object(self, *args, **kwargs):
-	# 	request =self.request
-	# 	slug = self.kwargs.get(slug)
-
-	# 	try:
-	# 		instance = Product.objects.get(slug=slug, published=True)
-	# 	except Product.DoesNotExist:
-	# 		raise Http404("Product Not Found...")
-	# 	except Product.MultipleObjectsReturned:
-	# 		qs = Product.objects.filter(slug=slug, published=True)
-	# 		instance = qs.first()
-	# 	except:
-	# 		raise Http404("This is strange")
-
-	# 	return instance
 
 
 def product_detail_slug_view(request, slug=None, *args, **kwargs):

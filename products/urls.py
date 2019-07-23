@@ -14,7 +14,7 @@ from .views import (
 urlpatterns = [
 
     # url(r'^products/$',ProductListView.as_view(), name="list"),
-    url(r'^products/$',product_list_view, name="list"),
+    url(r'^products/$', product_list_view, name="list"),
     # url(r'^products/(?P<pk>\d+)/$', product_detail_view),
     # url(r'^products/(?P<pk>\d+)/$', ProductDetailView.as_view(), name='detail'),
     url(r'^products/(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view(), name='detail'),

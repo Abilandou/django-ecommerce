@@ -37,21 +37,30 @@
 <!-- Display of featured products -->
 <div class="container-fluid">
   <div class="row">
-      <div class="indigo" style="width:100%; margin-top:-50px;" >
-          <p class="my-5">
-              <h2 class="orange-text" style="margin-left:30%;">Featured Items</h2>
-              <a href="#"><button class="btn transparent right"
-                      style="
-                         border-radius:3px;
-                         border-width:1px;
-                         border-color:orange;
-                         color:white;
-                         margin-top:-50px;
-                         margin-right:10px;
-                      " >
-                  Safer Purchase<i class="material-icons prefix">trending_flat</i>
-              </button></a>
-          </p>
+      <div class="col-12">
+          <div class="col-sm-3">
+              <div class="card hoverable " style="margin-top:-50px; padding:5px;" >
+                  <h5 class="orange-text text-darken-4">Categories</h5>
+                  <div class="divider"></div>
+              {% include 'categories/categories.html' %}
+              </div>
+          </div>
+          <div class=" col-sm-9 indigo" style="margin-top:-50px;" >
+              <p class="my-5">
+                  <h2 class="orange-text" style="margin-left:30%;">Featured Items</h2>
+                  <a href="#"><button class="btn transparent right"
+                          style="
+                             border-radius:3px;
+                             border-width:1px;
+                             border-color:orange;
+                             color:white;
+                             margin-top:-50px;
+                             margin-right:10px;
+                          " >
+                      Safer Purchase<i class="material-icons prefix">trending_flat</i>
+                  </button></a>
+              </p>
+          </div>
       </div>
   	<div class="col-12" >
         {% for product in allProducts %}
@@ -83,8 +92,29 @@
         </div>
     </div>
   </div>
-  </div> 
-</div>
+    {% if allProducts.has_other_pages %}
+      <ul class="pagination right">
+        {% if allProducts.has_previous %}
+          <li><a href="?page={{ allProducts.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in allProducts.paginator.page_range %}
+          {% if allProducts.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if allProducts.has_next %}
+          <li><a href="?page={{ allProducts.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+  </div>
 
 
 {% endblock %}

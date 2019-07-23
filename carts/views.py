@@ -8,6 +8,7 @@ from accounts.models import GuestEmail
 from addresses.forms import AddressForm
 from addresses.models import Address
 from products.models import Product
+from categories.models import Category
 
 
 def cart_home(request):
@@ -15,6 +16,7 @@ def cart_home(request):
 	# print(cart_obj)
 	
 	products = cart_obj.products.all()
+	categories = Category.objects.all();
 
 	total = 0
 	for cartItem in products:
@@ -23,7 +25,7 @@ def cart_home(request):
 	cart_obj.total = total
 	cart_obj.save()
 	
-	return render(request, "carts/cart_home.html", {"cart":cart_obj})
+	return render(request, "carts/cart_home.html", {"cart": cart_obj, 'categories': categories})
 
 
 def cart_update(request):
