@@ -9,6 +9,8 @@ from .models import GuestEmail
 from .forms import LoginForm, RegisterForm, GuestForm
 from products.models import Product
 
+from categories.models import Category
+
 def guest_register_view(request):
     form = GuestForm(request.POST or None)
     context = {
@@ -29,11 +31,14 @@ def guest_register_view(request):
 
     return redirect("/register/")
 
+
 def login_page(request):
+    categories = Category.objects.all()
     form = LoginForm(request.POST or None)
     context = {
         "title": "Login To Your Account",
-        "form": form
+        "form": form,
+        "categories": categories,
     }
     # print(request.user.is_authenticated())
     next_ = request.GET.get('next')
@@ -56,11 +61,11 @@ def login_page(request):
             except:
                 pass
             if is_safe_url(redirect_path, request.get_host()):
-            	return redirect(redirect_path)
+                return redirect(redirect_path)
             else:
-            	return redirect('/cart/')
+                return redirect('/cart/')
         else:
-            #return an invalid message
+            # return an invalid message
             print("Error");
           
     return render(request, "accounts/login.html", context, {} )
@@ -68,11 +73,14 @@ def login_page(request):
 
 User = get_user_model()
 
+
 def register_page(request):
+    categories = Category.objects.all()
     form = RegisterForm(request.POST or None)
     context = {
         "title": "New User Register",
-        "form":form
+        "form": form,
+        "categories": categories,
     }
     if form.is_valid():
         print(form.cleaned_data)

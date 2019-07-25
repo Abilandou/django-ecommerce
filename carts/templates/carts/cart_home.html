@@ -30,24 +30,23 @@
 
                         </td>
                         <td class="cart_quantity">
-                            <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href="#"> + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity" value="2" autocomplete="off" size="2">
-                               
-                                <a class="cart_quantity_down" href="#"> - </a>
-                               
-                            </div>
+                             <form>
+                                <input type="hidden" value="{{product.price}}" id="myprice">
+                                 <input type="hidden" value="1.08" id="shipIn">
+
+                                Quantity:  <input id="quant"  type="number" value="1" min="1" max="10" name="quantity" style="height:50px; width:80px;">
+                           </form>
                         </td>
                         <td class="cart_price">
-                            {{product.price}}
+                            <p id="priceI"> FCFA {{product.price}}</p>
                         </td>
                         <td class="cart_total">
                             
-                            {{product.price}}
+                            <p id="priceII"> FCFA {{product.price}}</p>
                         </td>
                         <td class="cart_delete">
                             <span>
-                            {% include './../snippets/update_cart.html' with product=object cart=cart in_cart=True %}
+                            {% include './../snippets/update_cart.html' with product=product cart=cart in_cart=True %}
 
                             </span>
                         </td>
@@ -76,9 +75,11 @@
 					<div class="total_area">
                     {% if cart.total > 0 %}
 						<table>
-							<li class="">Cart Sub Total <span>${{cart.subtotal }}</span></li>
-							<li>Shipping Cost <span>$1.08</span></li>
-							<li>Total <span>${{cart.total }}</span></li>
+                            <ul>
+							<li class="">Cart Sub Total <span id="priceIIII">FCFA{{cart.subtotal }}</span></li>
+							<li>Shipping Cost <span id="ship">Free</span></li>
+							<li>Total <span id="priceIII"> FCFA {{cart.total }}</span></li>
+                            </ul>
 						</table>
 							<a class="btn btn-success check_out" href='{% url "cart:checkout" %}'>Check Out</a>
 					</div>

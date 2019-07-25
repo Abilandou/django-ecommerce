@@ -2,14 +2,33 @@
 {% load staticfiles %}
 {% block content %}
 
+<style>
+    /* Slow-motion Zoom Container */
+.img-hover-zoom #img-det {
+  transform-origin: 60% 65%;
+  transition: transform 3s, filter 2s ease-in-out;
+
+}
+
+/* The Transformation */
+.img-hover-zoom:hover #img-det {
+  filter: brightness(100%);
+  transform: scale(1.5);
+}
+#quanDet: {
+    border-bottom-color: #CDCDCD;
+}
+</style>
+
+
 <div class="container-fluid">
     <div class="row card hoverable">
         <div class="col-sm-12">
-            <div class="col-sm-4">
+            <div class="col-sm-4  img-hover-zoom" >
                 {% if object.image %}
-            <div class="card-image waves-effect waves-block waves-light">
-            <a href="/products/{{ product.slug}}"><img width="100px" height="200px" src="{{ product.image.url}}" class="img-fluid my-4">
-           </a>
+                <h6>Move mouse over image for better view</h6>
+            <div class="card-image waves-effect waves-block waves-light ">
+                <img id="img-det" width="100px" height="200px" src="{{ product.image.url}}" class="img-fluid my-4">
             </div>
                {% endif %}
             </div>
@@ -21,11 +40,13 @@
 
                         <p>Condition: <b>New</b><br/>
                             <form>
-                                Quantity:  <input type="number" value="1" min="1" max="10" name="quantity" style="height:50px; width:80px;">
+                                <input type="hidden" value="{{object.price}}" id="myprice">
+                            
+                                Quantity:  <input id="quant"  type="number" value="1" min="1" max="10" name="quantity" style="height:50px; width:80px;">
                            </form>
                         </p>
                     <div style="height:120px; background-color:#CDCDCD;" >
-                        <p>Price:<b class="orange-text"> FCFA{{ object.price }}</b></p>
+                        <p>Price:<b class="orange-text" id="priceI"> FCFA {{ object.price}}</b></p>
                         <p  class="right" style="margin-right:120px; margin-top:-50px; ">
                             <br>
                             {% if product in cart.products %}
@@ -71,9 +92,5 @@
 </div>
 
 {% endblock %}
-
-
-
-
 
 

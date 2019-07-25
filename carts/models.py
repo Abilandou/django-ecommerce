@@ -9,6 +9,7 @@ User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 
+
 class CartManager(models.Manager):
 
 	def new_or_get(self, request):
@@ -59,6 +60,7 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
 			instance.subtotal = total
 			instance.save()
 
+
 m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 
 
@@ -67,6 +69,7 @@ def pre_save_cart_receiver(sender, instance, *args, **kwargs):
 		instance.total = float(instance.subtotal) + float(1.08) #8% tax
 	else:
 		instance.total = 0.00
+
 
 pre_save.connect(pre_save_cart_receiver, sender=Cart)
 

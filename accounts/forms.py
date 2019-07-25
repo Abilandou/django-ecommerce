@@ -82,7 +82,8 @@ class RegisterForm(forms.Form):
             }
         )
     )
-    #verify if username already exists
+    # verify if username already exists
+
     def clean_username(self):
         
         username = self.cleaned_data.get("username")
@@ -102,7 +103,7 @@ class RegisterForm(forms.Form):
 
         return email
 
-    #Define a function to handle the logics of validation
+    # Define a function to handle the logics of validation
 
     # def clean_password(self):
     #     data = self.cleaned_data

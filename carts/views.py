@@ -16,7 +16,7 @@ def cart_home(request):
 	# print(cart_obj)
 	
 	products = cart_obj.products.all()
-	categories = Category.objects.all();
+	categories = Category.objects.all()
 
 	total = 0
 	for cartItem in products:
@@ -109,7 +109,7 @@ def checkout_home(request):
 		'''
 
 	context = {
-		"object":order_obj,
+		"object": order_obj,
 		"billing_profile": billing_profile,
 		"login_form": login_form,
 		"guest_form":guest_form,

@@ -67,17 +67,17 @@ urlpatterns = [
     url(r'^register/guest/$', guest_register_view, name="guest_register"),
     url(r'^logout/$', LogoutView.as_view(), name="logout"),
 
-# Included urls
+    # Included urls
 
     url(r'^', include('products.urls', namespace="products")),
     url(r'^search/', include('search.urls', namespace="search")),
     url(r'^cart/', include('carts.urls', namespace="cart")),
     url(r'^', include('categories.urls', namespace="categories")),
+    url('paypal/', include('paypal.standard.ipn.urls', namespace="paypal")),
 
-# Endincluded url
-    
+    # End included url
 
-# Admin Register Routes
+    # Admin Register Routes
     url(r'^admin/', admin.site.urls),
 ]
 

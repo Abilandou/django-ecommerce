@@ -73,6 +73,7 @@ def product_list_view(request, category_name=None):
 
 class ProductDetailView(DetailView):
 	queryset = Product.objects.all()
+	categories = Category.objects.all()
 	template_name = "product/product_detail.html"
 
 	def get_context_data(self, *args, **kwargs):
@@ -95,20 +96,16 @@ class ProductDetailView(DetailView):
 
 
 def product_detail_view(request, pk=None, *args, **kwargs):
-	# getSingleProduct = Product.objects.get(pk=pk)#pk=id
-	# getSingleProduct = get_object_or_404(Product, pk=pk)
-	# instance = Product.objects.filter(id=pk)
-	# print qs
+
 	instance = Product.objects.get_by_id(pk)
+	categories = Category.objects.all()
 	if instance is None:
 		raise Http404("Product doesn't exists")
-	# if qs.exists() and qs.count() ==1:#len(qs)
-	# 	instance = qs.first()
-	# else:
-	# 	raise Http404("Product doesn't exists")
+
 	context = {
 		'title': 'Product Detail',
-		'productDetail': instance
+		'productDetail': instance,
+		'categories': categories,
 	}
 
 	return render(request, "product/product_detail.html", context, {})
@@ -116,6 +113,7 @@ def product_detail_view(request, pk=None, *args, **kwargs):
 
 class ProductDetailSlugView(DetailView):
 	queryset = Product.objects.all()
+	categories = Category.objects.all()
 	template_name = "product/product_detail.html"
 
 	def context_data(self, *args, **kwargs):
@@ -127,20 +125,14 @@ class ProductDetailSlugView(DetailView):
 
 
 def product_detail_slug_view(request, slug=None, *args, **kwargs):
-
+	categories = Category.objects.all()
 	getAllProductsInCart = Cart.objects.all()
 	getSingleProduct = get_object_or_404(Product, slug=slug)
 	context = {
 		'title': 'Product Detail',
 		'productDetail': getSingleProduct,
-		'allCarts':getAllProductsInCart
+		'allCarts':getAllProductsInCart,
+		'categories': categories,
 	}
-
-	# def context_data(self, *args, **kwargs):
-	# 	context = super(product_detail_slug_view, self).get_context_data(*args, **kwargs)
-	# 	cart_obj, new_obj = Cart.objects.new_or_get(self.request)
-	# 	context['cart'] = cart_obj
-	# 	print(cart_obj)
-	# 	return context
 
 	return render(request, "product/product_detail.html", context, {})

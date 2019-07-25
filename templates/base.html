@@ -1,5 +1,5 @@
 {% load staticfiles %}
-{% load static %}
+
 
 
 <html lang="en">
@@ -30,14 +30,42 @@
 	{% include 'base/footer.html' %}
 
 
-	<script type="text/javascript" src="{% static 'js/jquery-3.3.1.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/cart/cart.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/cart/cart.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/cart/rivets-cart.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/cart/rivets-cart.min.js' %}"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/0.4.1/cart.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/matjs/materialize.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/matjs/default' %}"></script>
+	<script type="text/javascript" src="{% static 'default' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="{% static 'script/jsmain.js' %}"></script>
+
+
+
+<!--	All My Jquery Codes-->
+
+	<script>
+		$(function(){
+			var price = $("#quanDet").val();
+			var quantity = $("#quant").val();
+			var res = price * quantity;
+			$("#nill").click(function(){
+				alert(quantity);
+				return false;
+			});
+
+			$("#quant").on('change', function(){
+				var qty = $(this).val();
+				var price = $("#myprice").val();
+				var total = qty * price;
+				var shipCost =
+				$("#priceI").text("FCFA "+ total);
+				$("#priceII").text("FCFA "+ total);
+				$("#priceIII").text("FCFA "+ total);
+				$("#priceIIII").text("FCFA "+ total);
+			});
+
+		});
+
+
+	</script>
 
 </body>
 </html>

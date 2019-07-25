@@ -39,7 +39,9 @@
 <div class="navbar-fixed ">
   <nav class="teal lighten-2" >
     <div class="nav-wrapper">
-      <a class="navbar-brand" href="{{ home_url }}"><img src="{% static 'images/logo/logo.png' %}" alt="Norway"></a>
+      <a class="navbar-brand" href="{{ home_url }}"><b class="orange-text text-darken-5" style="font-size:40px;">ABK</b>
+<!--        <img src="{% static 'images/logo/logo.png' %}" alt="Norway">-->
+      </a>
       <ul class="right hide-on-med-and-down">
         <li>{% include 'search/snippets/search_form.html' %}</li>
       </ul>
@@ -84,7 +86,7 @@
       </li>
         <li class=" right nav-item {% if request.path == login_url %} active {% endif %}">
           <a class="white-text nav-link" href="#">
-            <b class="orange-text text-darken-4 text-capitalize">{{request.user.username}}</b>
+            <b class="orange-text text-capitalize">{{request.user.username}}</b>
           </a>
       </li>
     {% else %}
